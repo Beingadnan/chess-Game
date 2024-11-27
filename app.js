@@ -18,9 +18,55 @@ app.set('view engine',"ejs");
 app.use(express.static(path.join(__dirname,"public")))
 
 app.get('/',(req,res)=>{
-    res.render("index")
+    res.render("index",{title:"Chess Game"})
 })
 
+// io.on("connection",(uniquesocket)=>{
+//     console.log("Connected")
+
+//     if(!players.white){
+//         players.white=uniquesocket.id;
+//         uniquesocket.emit("PlayerRole","w");  
+//     }
+//     else if(!players.black){
+//         players.black=uniquesocket.id;
+//         uniquesocket.emit("PlayerRole","b")
+//     }
+//     else{
+//         uniquesocket.emit("spectatorRole")
+//     }
+
+//     uniquesocket.on("disconnect",()=>{
+//         if(uniquesocket.id===players.white){
+//             delete players.white
+//         } 
+//         else if(uniquesocket.id===players.black){
+//             delete players.black
+//         }
+//     })
+
+//     uniquesocket.on("move",(move)=>{
+//         try {
+//             if(chess.turn() === "w" && uniquesocket.id !== players.white) return;
+//             if(chess.turn()=== "b" && uniquesocket.id !== players.black) return;
+
+//             const result=chess.move(move);
+
+//             if(result){
+//                 currentPlayer=chess.turn();
+//                 io.emit("move",move);
+//                 io.emit("boardState",chess.fen());
+//             }
+//             else{
+//                 console.log("Invalid Move : ",move);
+//                 uniquesocket.emit("Invalid Move",move);
+//             }
+//         } catch (error) {
+//             console.log(err)
+//             uniquesocket.emit("Invalid Move : ",move);
+//         }
+//     })
+// })
 
 io.on("connection", (uniquesocket) => {
     console.log("Connected");
@@ -66,10 +112,7 @@ io.on("connection", (uniquesocket) => {
     });
 });
 
-const PORT = process.env.PORT || 8000;
-
-server.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
-
-module.exports = app;
+server.listen(8000,(req,res)=>{
+    console.log("Server started")
+})
+ module.exports=app;
