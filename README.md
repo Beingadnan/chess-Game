@@ -45,3 +45,18 @@ Invalid moves send an error notification to the player who attempted the move.
 ## 4. Frontend
 Displays the chessboard and allows players to interact with it.
 Reflects real-time updates using Socket.IO.
+
+# Installation
+
+## Clone the repository:
+git clone <repository-url>
+cd chess-game
+
+## Install dependencies:
+npm install
+
+## Start the server:
+node app.js
+
+## Open a browser and navigate to:
+http://localhost:8000
